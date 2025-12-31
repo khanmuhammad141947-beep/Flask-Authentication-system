@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block link %}<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">{% endblock link %}
+
+{% block title %}Home{% endblock title %}
+
+{% block main %}
+<div class="home-wrapper">
+    <header class="home-header">
+        <nav>
+            <div class="logo">MyApp</div>
+            <a href="{{ url_for('main.logout') }}" class="btn-logout">Logout</a>
+        </nav>
+    </header>
+
+    <main class="home-content">
+        <div class="welcome-card">
+            <div class="user-avatar">
+                <span class="initials">W</span>
+            </div>
+            <h1>Welcome back!</h1>
+            <p>You have successfully logged into your account. Explore your dashboard below.</p>
+            
+            <div class="dashboard-stats">
+                <div class="stat-item">
+                    <span class="stat-value">Active</span>
+                    <span class="stat-label">Status</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">{{ current_time or 'Today' }}</span>
+                    <span class="stat-label">Last Login</span>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+{% endblock main %}
