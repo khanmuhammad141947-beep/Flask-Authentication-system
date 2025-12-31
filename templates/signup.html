@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block link %}<link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">{% endblock link %}
+
+{% block main %}
+<div class="signup-wrapper">
+    <div class="signup-container">
+        <h2>Create Account</h2>
+        <p>Join us today! It only takes a minute.</p>
+
+        <form action="{{ url_for('main.signup_click') }}" method="post">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="first_name">First Name</label>
+                    <input type="text" name="first_name" id="first_name" value="{{first_name or ''}}" placeholder="khan" required>
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" name="last_name" id="last_name" value="{{last_name or ''}}" placeholder="muhammad" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="user_name">Username</label>
+                <input type="text" name="user_name" id="user_name" value="{{user_name or ''}}" placeholder="khanM123" required>
+            </div>
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for message in messages %}
+                            <div class="flash-error">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" name="email" id="email" value="{{email or ''}}" placeholder="khanM@example.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" placeholder="••••••••" required>
+                <small class="help-text">Must be at least 8 characters.</small>
+            </div>
+
+            <button type="submit" class="btn-submit">Create Account</button>
+        </form>
+
+        <div class="form-footer">
+            <p>Already have an account? <a href="{{ url_for('main.login') }}">Log In</a></p>
+        </div>
+    </div>
+</div>
+{% endblock main %}
