@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block link %}<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">{% endblock link %}
+
+{% block main %}
+<div class="login-wrapper">
+    <div class="login-container">
+        <h2>Welcome Back</h2>
+        <p>Please enter your details to login</p>
+
+        <form action="{{url_for('main.login_click')}}" method="post">
+            <div class="form-group">
+                <label for="user_name">Username</label>
+                <input type="text" name="user_name" id="user_name" placeholder="Enter your username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" placeholder="Enter your password" required>
+            </div>
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for message in messages %}
+                            <p class="flash-error">{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <button type="submit" class="btn-primary">Login</button>
+        </form>
+
+        <div class="form-footer">
+            <span>Don't have an account?</span>
+            <a href="{{url_for('main.signup')}}" class="link-signup">Sign Up</a>
+        </div>
+    </div>
+</div>
+{% endblock main %}
